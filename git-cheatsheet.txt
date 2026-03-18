@@ -76,6 +76,9 @@ Verify it was added
 Change existing remote URL
    git remote set-url origin git@github.com:KimTholstorf/VPNProxy.spoon.git
 
+Remove a remote
+   git remote remove origin
+
 First push to a new remote (sets tracking branch)
    git push -u origin main
 
