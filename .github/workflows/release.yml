@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release (e.g. v1.0.0)'
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build VPNProxy.spoon.zip
+        run: |
+          mkdir -p dist/VPNProxy.spoon/bin
+          cp init.lua dist/VPNProxy.spoon/
+          cp bin/install.sh dist/VPNProxy.spoon/bin/
+          cp bin/configure-VPNProxy.sh dist/VPNProxy.spoon/bin/
+          chmod +x dist/VPNProxy.spoon/bin/install.sh
+          chmod +x dist/VPNProxy.spoon/bin/configure-VPNProxy.sh
+          cd dist
+          zip -r ../VPNProxy.spoon.zip VPNProxy.spoon/
+          echo "Built VPNProxy.spoon.zip:"
+          unzip -l ../VPNProxy.spoon.zip
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: VPNProxy.spoon.zip
+          generate_release_notes: true
+          fail_on_unmatched_files: true

@@ -1,0 +1,32 @@
+-- ~/.hammerspoon/init.lua
+--
+-- Loads the VPNProxy spoon and configures it for this machine.
+-- Populated by configure-VPNProxy.sh — edit manually or re-run
+-- configure-VPNProxy.sh to reconfigure, then reload Hammerspoon.
+
+hs.loadSpoon("VPNProxy")
+
+-- Proxy server address detected from corporate VPN PAC file.
+-- Populated by configure-VPNProxy.sh — edit manually if needed.
+spoon.VPNProxy.proxyHost = "{{PROXY_HOST}}"
+spoon.VPNProxy.proxyPort = "{{PROXY_PORT}}"
+
+-- VPN subnet CIDR pattern used to detect whether the VPN tunnel is active.
+-- Populated by configure-VPNProxy.sh — edit manually if needed.
+-- To find manually: connect to VPN and run:
+--   ifconfig | grep -A2 utun | grep "inet "
+-- Look for the utun interface with an IPv4 address (not inet6), e.g.:
+--   inet 10.154.85.241 --> 10.154.85.241 netmask 0xfffff000
+-- Take the first two octets: 10.154.85.241 -> "^10%.154%."
+-- Note: dots must be escaped as %. in Lua patterns.
+spoon.VPNProxy.vpnCIDR = "{{VPN_CIDR}}"
+
+-- List of macOS network services to apply proxy settings to.
+-- Populated by configure-VPNProxy.sh — edit manually if needed.
+-- To find manually: run networksetup -listallnetworkservices
+-- Exclude virtual interfaces: Thunderbolt Bridge, Bluetooth, display controls.
+spoon.VPNProxy.networkServices = {
+{{NETWORK_SERVICES}}
+}
+
+spoon.VPNProxy:start()

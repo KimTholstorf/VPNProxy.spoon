@@ -1,0 +1,98 @@
+GIT WORKFLOW — VPNProxy.spoon
+══════════════════════════════════════════════════════════════
+
+REGULAR COMMIT & PUSH
+──────────────────────────────────────────────────────────────
+
+1. Check what has changed
+   git status
+
+2. Review the actual diff
+   git diff
+
+3. Stage the files you want to commit
+   git add bin/install.sh bin/configure-VPNProxy.sh
+   git add init.lua init.lua.template README.md
+   git add .github/workflows/release.yml
+   git add .gitignore
+   (or stage everything: git add .)
+
+4. Commit with a message
+   git commit -m "your message here"
+
+5. Push to GitHub
+   git push origin main
+
+
+CUTTING A RELEASE (triggers the GitHub Actions zip + release)
+──────────────────────────────────────────────────────────────
+
+6. Tag the commit with a version number
+   git tag v1.0.0
+
+7. Push the tag to GitHub
+   git push origin v1.0.0
+
+   GitHub Actions will automatically:
+   - build VPNProxy.spoon.zip
+   - create a GitHub Release
+   - attach the zip as a release asset
+
+
+UPDATING AN EXISTING RELEASE
+──────────────────────────────────────────────────────────────
+
+8. Delete the old tag locally and on GitHub (if you need to redo it)
+   git tag -d v1.0.0
+   git push origin --delete v1.0.0
+
+9. Re-tag and push
+   git tag v1.0.0
+   git push origin v1.0.0
+
+
+CHECKING RELEASE STATUS
+──────────────────────────────────────────────────────────────
+
+10. Check the workflow run in the terminal
+    gh run list
+
+11. Watch a specific run
+    gh run watch
+
+12. View the release
+    gh release view v1.0.0
+
+
+ADDING / CHANGING THE REMOTE
+──────────────────────────────────────────────────────────────
+
+Add remote (first time)
+   git remote add origin git@github.com:KimTholstorf/VPNProxy.spoon.git
+
+Verify it was added
+   git remote -v
+
+Change existing remote URL
+   git remote set-url origin git@github.com:KimTholstorf/VPNProxy.spoon.git
+
+First push to a new remote (sets tracking branch)
+   git push -u origin main
+
+
+USEFUL EXTRAS
+──────────────────────────────────────────────────────────────
+
+List all tags
+   git tag
+
+See full commit log
+   git log --oneline
+
+Undo last commit (keeps changes staged)
+   git reset --soft HEAD~1
+
+Check what remote branch you are tracking
+   git branch -vv
+
+══════════════════════════════════════════════════════════════
