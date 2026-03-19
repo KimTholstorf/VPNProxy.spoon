@@ -8,7 +8,7 @@
 
 VPNProxy.spoon is a [Hammerspoon](https://hammerspoon.org) spoon that watches your network interfaces and automatically sets or clears the macOS system proxy and shell environment variables (`HTTP_PROXY` / `HTTPS_PROXY`) the moment your corporate VPN connects or disconnects. No menu bar clicks, no manual proxy toggling — it just works.
 
-## 🪚 Features
+## 📋 Features
 
 - **Automatic detection** — monitors network state changes in real time via Hammerspoon's network watcher
 - **System proxy** — sets and clears macOS proxy settings via `networksetup` for all configured network services
@@ -20,7 +20,7 @@ VPNProxy.spoon is a [Hammerspoon](https://hammerspoon.org) spoon that watches yo
 
 ---
 
-## 👷 Quick start
+## 👍 Quick start
 
 Connect to your corporate VPN, then run:
 
@@ -37,7 +37,7 @@ The installer will:
 
 ---
 
-## 🏗️ Requirements
+## ✋ Requirements
 
 - macOS 13 or later
 - [Hammerspoon](https://hammerspoon.org) (installed automatically if missing)
@@ -47,7 +47,7 @@ The installer will:
 
 ---
 
-## 📦 Installation
+## 🏗️ Installation
 
 ### One-liner (recommended)
 
@@ -101,7 +101,7 @@ To configure manually, edit `~/.hammerspoon/init.lua` directly — see [`init.lu
 
 ---
 
-## 🔍 How it works
+## 🤓 How it works
 
 ```
 VPN connects
